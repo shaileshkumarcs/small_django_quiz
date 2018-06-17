@@ -83,3 +83,15 @@ class TakeQuizForm(forms.ModelForm):
         question = kwargs.pop('question')
         super().__init__(*args, **kwargs)
         self.fields['answer'].queryset = question.answers.order_by('text')
+
+
+class StudentSignUpDetailForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_studentdetails = True
+        if commit:
+            user.save()
+        return user

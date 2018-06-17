@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'includes/nav.html' with active='new' %}
+
+<h3>List Of Student</h3>
+
+<table class="table table-hover table-bordered">
+    <thead class="text-center">
+        <tr>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        {% for list in lists %}
+        <tr>
+            <td>{{ list.first_name }}</td>
+            <td>{{ list.roll_number }}</td>
+            <td><a href="{{ list.get_absolute_url }}" class="btn btn-sm btn-success">Detail View</a>
+            <a href="profile-update/{{ list.pk }}" class="btn btn-sm btn-success">Update</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -23,6 +23,7 @@ class StudentSignUpView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        #print(form)
         user = form.save()
         login(self.request, user)
         return redirect('students:quiz_list')

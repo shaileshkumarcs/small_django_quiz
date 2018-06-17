@@ -1,8 +1,12 @@
 from django.urls import include, path
 
+
 from .views import classroom, students, teachers
+from student_detail.views import StudentListView
+
 
 urlpatterns = [
+
     path('', classroom.home, name='home'),
 
     path('students/', include(([
@@ -22,4 +26,9 @@ urlpatterns = [
         path('quiz/<int:quiz_pk>/question/<int:question_pk>/', teachers.question_change, name='question_change'),
         path('quiz/<int:quiz_pk>/question/<int:question_pk>/delete/', teachers.QuestionDeleteView.as_view(), name='question_delete'),
     ], 'classroom'), namespace='teachers')),
+
+    path('studetails/',include(([
+        path('',StudentListView.as_view(), name="listview")
+    ], 'student_detail'), namespace = 'stdetails'))
+
 ]
